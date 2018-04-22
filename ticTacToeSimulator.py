@@ -2,7 +2,7 @@
 from ticTacToe import getAIMove,makeAIMove,isWinner,drawBoard
 import ticTacToeAlternativeAI as altAI
 import ticTacToeCenterFirstAI as alt2AI
-import ticTacToeMinMaxAI as alt3AI
+import ticTacToeMinimaxAI as alt3AI
 import time
 START_TIME = time.time() #Calculate start time
 NO_OF_GAMES = 10 #Change as per requirement
