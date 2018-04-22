@@ -1,5 +1,5 @@
 '''Inheriting from the main ticTacToe game, this is an alternative AI which plays the center move first rather than playing the corners first as in the original AI.
-The main goal here is to play this AI against the original AI and see which one wins'''
+The main goal here is to play this AI against the original AI and see which one is a better stratergy'''
 
 from ticTacToe import isSpaceFree,getBoardCopy,makeMove,isWinner,chooseRandomMoveFromList
 def getAIMove(board,letter):
