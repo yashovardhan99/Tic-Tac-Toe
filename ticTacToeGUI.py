@@ -14,8 +14,6 @@ startGameCheck = False
 moves = 0
 
 master=Tk()
-f = Frame(master, height=300, width=300)
-
 
 def makeGUIMove(pos,board,letter):
     #To make the relevant move and also update the GUI accordingly
@@ -65,21 +63,41 @@ def onClick(id):
         #Do Something maybe
         pass
 
-def __init__():
-    global gameBoard
-    #Initial setup of game board
-    f.grid()
+def restartGame():
+    global gameBoard,moves,b,var,playerMove,startGameCheck
     for i in range(1,10):
         gameBoard[i]=str(i)
         var[i]=Variable(value=0)
-        b[i] = Button(f,text=str(i),command= lambda id=i:onClick(id), width=8, height=4)
+        b[i].config(text=str(i),state=NORMAL)
+    playerMove=False
+    startGameCheck=False
+    moves=0
+    startGame()
+
+
+def __init__():
+    global gameBoard,master
+    #Initial setup of game board
+    for i in range(1,10):
+        gameBoard[i]=str(i)
+        var[i]=Variable(value=0)
+        b[i] = Button(master,text=str(i),font={"arial",10,"bold"},padx=2,pady=2,overrelief=RIDGE,command= lambda id=i:onClick(id))
         #b[i].pack(fill=BOTH,expand=1)
         if i in range(1,4):
-            b[i].grid(row=2,column=i-1,)
+            b[i].grid(row=2,column=i-1,sticky=NSEW)
         elif i in range(4,7):
-            b[i].grid(row=1,column=i-4)
+            b[i].grid(row=1,column=i-4,sticky=NSEW)
         else:
-            b[i].grid(row=0,column=i-7)
+            b[i].grid(row=0,column=i-7,sticky=NSEW)
+    for i in range(3):
+        Grid.columnconfigure(master,i,weight=1,minsize=80)
+        Grid.rowconfigure(master,i,weight=1,minsize=80)
+    menubar = Menu(master)
+    menubar.add_command(label='Restart Game',command=restartGame)
+    master.config(menu=menubar)
+    master.title("Tic Tac Toe")
+    startGame()
+
 #Starting here
 def startGame():
     global moves
@@ -91,18 +109,13 @@ def startGame():
     moves=0
     current = 0 #0 for player, 1 for AI
 
-    '''while True:
-        if moves>=9:
-            t=Message(master,text="Its a DRAW!")
-            t.pack()
-            break'''
-
     if current==0:
         playerMove=TRUE
     else:
+        makeAIMove()
         playerMove=False
             
 
  #Calls mainloop for GUI setup. Should only be called once
 __init__() #Inirial setup
-mainloop()
+master.mainloop()

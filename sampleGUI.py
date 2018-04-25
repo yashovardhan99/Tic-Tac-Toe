@@ -7,6 +7,7 @@ def onClick(i):
     #Check if user's turn
     print("TEST"+str(i))
     b[i].config(background='blue',state=DISABLED)
+    b[i].destroy()
 
 
 f = Frame(master, height=300, width=300)
@@ -23,4 +24,9 @@ for i in range(1,10):
         b[i].grid(row=1,column=i-4)
     else:
         b[i].grid(row=0,column=i-7)
-mainloop()
+    
+menubar = Menu(master)
+menubar.add(itemType=COMMAND,foreground='green',label='New Game',command=onClick)
+menubar.config(bg='blue',fg='red')
+master.config(bg='darkblue',menu=menubar)
+master.mainloop()
